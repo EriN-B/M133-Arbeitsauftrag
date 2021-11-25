@@ -1,43 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
 
-    <link href="./style.css" rel="stylesheet">
-    <title>Document</title>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheet.css">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script> 
+  <title>Document</title>
 </head>
-    <body>
-        <main class="p-3 flex">
-            <div class="p-3 w-80 bg-gray-100 rounded">
-                <h3 class="text-sm font-medium text-gray-900">Todo</h3>
-                <ul class="mt-2">
-                    <li class="mt-2"> 
-                        <div class="block p-5 bg-white rounded shadow">
-                            <div class="flex justify-between">
-                                <p>Das ist ein Text</p>
-                                <span class="material-icons">
-                                    close
-                                </span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="mt-2"> 
-                        <div class="block p-5 bg-white rounded shadow">
-                            <div class="flex justify-between">
-                                <p>Das ist ein Text</p>
-                                <span class="material-icons">
-                                    close
-                                </span>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </main>      
-    </body>
+<body>
+  <main>
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 container">
+      <main class="p-3 flex">
+        <div class="mr-2 ml-2 p-3 w-80 bg-gray-100 rounded col min-h-full">
+          <h3 class="text-sm font-medium text-gray-900">Todo</h3>
+          <div class="cards min-h-full	">
+          <ul class="mt-2 list-none	" id="col1" class="draggable min-h-full	">
+            <li class="mt-2" id="c1">
+              <div class="block p-5 bg-white rounded shadow">
+                <div class="flex justify-between">
+                  <p>Das ist ein Textsa as assasa sasa sa sa </p>
+                  <span class="material-icons text-gray-500">
+                    <a onclick="deleteItem()" class="large material-icons icon-red cursor-pointer">delete</a>
+                  </span>
+                </div>
+                <div class="mt-5 flex justify-between">
+                  <p class="text-sm text-gray-600 ">Sep 14</p>
+                  <div>
+                    <span class="inline-flex items-center bg-indigo-100 rounded px-2 py-1">
+                      <svg class="h-2 w-2 text-indigo-500" viewBow="0 0 8 8" fill="currentColor">
+                        <circle cx="4" cy="4" r="3" />
+                      </svg>
+                      <span class="ml-2 text-sm font-medium text-indigo-900">
+                        Feature
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="mt-2" id="c2">
+              <div class="block p-5 bg-white rounded shadow">
+                <div class="flex justify-between">
+                  <p>Das ist ein Text</p>
+                  <span class="material-icons text-gray-500">
+                    <a onclick="deleteItem()" class="large material-icons icon-red cursor-pointer">delete</a>
+                  </span>
+                </div>
+                <div class="mt-5 flex justify-between">
+                  <p class="text-sm text-gray-600 ">Sep 14</p>
+                  <div>
+                    <span class="inline-flex items-center bg-green-100 rounded px-2 py-1">
+                      <svg class="h-2 w-2 text-green-500" viewBow="0 0 8 8" fill="currentColor">
+                        <circle cx="4" cy="4" r="3" />
+                      </svg>
+                      <span class="ml-2 text-sm font-medium text-green-900">
+                        Design
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="mt-2" id="c3">
+              <div class="block p-5 bg-white rounded shadow">
+                <div class="flex justify-between">
+                  <p>Das ist ein Text</p>
+                  <span class="material-icons text-gray-500">
+                    <a onclick="deleteItem()" class="large material-icons icon-red cursor-pointer">delete</a>
+                  </span>
+                </div>
+                <div class="mt-5 flex justify-between">
+                  <p class="text-sm text-gray-600 ">Sep 14</p>
+                  <div>
+                    <span class="inline-flex items-center bg-yellow-100 rounded px-2 py-1">
+                      <svg class="h-2 w-2 text-yellow-500" viewBow="0 0 8 8" fill="currentColor">
+                        <circle cx="4" cy="4" r="3" />
+                      </svg>
+                      <span class="ml-2 text-sm font-medium text-yellow-900">
+                        Test
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        </div>
+        <div class="mr-2 ml-2 p-3 w-80 bg-gray-100 rounded col min-h-full" >
+          <h3 class="text-sm font-medium text-gray-900">In Progress</h3>
+          <div class="cards min-h-full">
+            <ul class="mt-2" id="col2" class="draggable min-h-full">
+              <li class="mt-2" id="c4">
+                <div class="block p-5 bg-white rounded shadow">
+                  <div class="flex justify-between">
+                    <p>Das ist ein Text</p>
+                    <span class="material-icons text-gray-500">
+                      <a onclick="deleteItem()" class="large material-icons icon-red cursor-pointer">delete</a>
+                    </span>
+                  </div>
+                  <div class="mt-5 flex justify-between">
+                    <p class="text-sm text-gray-600 ">Sep 14</p>
+                    <div>
+                      <span class="inline-flex items-center bg-indigo-100 rounded px-2 py-1">
+                        <svg class="h-2 w-2 text-indigo-500" viewBow="0 0 8 8" fill="currentColor">
+                          <circle cx="4" cy="4" r="3" />
+                        </svg>
+                        <span class="ml-2 text-sm font-medium text-indigo-900">
+                          Feature
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="mr-2 ml-2 p-3 w-80 bg-gray-100 rounded col min-h-full">
+          <h3 class="text-sm font-medium text-gray-900">Finisĥed</h3>
+          <div class="cards min-h-full ">
+            <ul class="mt-2 min-h-full" id="col3">
+              <li class="mt-2" id="c5">
+                <div class="block p-5 bg-white rounded shadow">
+                  <div class="flex justify-between">
+                    <p>Das ist ein Text</p>
+                    <span class="material-icons text-gray-500">
+                      <a onclick="deleteItem()" class="large material-icons icon-red cursor-pointer">delete</a>
+                    </span>
+                  </div>
+                  <div class="mt-5 flex justify-between">
+                    <p class="text-sm text-gray-600 ">Sep 14</p>
+                    <div>
+                      <span class="inline-flex items-center bg-indigo-100 rounded px-2 py-1">
+                        <svg class="h-2 w-2 text-indigo-500" viewBow="0 0 8 8" fill="currentColor">
+                          <circle cx="4" cy="4" r="3" />
+                        </svg>
+                        <span class="ml-2 text-sm font-medium text-indigo-900">
+                          Feature
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script>
+      function deleteItem() {
+        window.alert("test");
+      }
+
+      var obj = '#col1,#col2,#col3',
+    timer;
+
+function loadMore(){
+  $('.loadMore').addClass('animateLoadMore');
+  setTimeout(function(){
+    $('.loadMore').removeClass('animateLoadMore').hide();
+    $('.hide').show().removeClass('hide');
+    $(obj).sortable('refresh');
+  }, 600)
+}
+
+$(obj + ', .cards').sortable({
+  connectWith: '.draggable,.cards',
+  placeholder: 'highlight',
+  opacity: 0.5,
+  revert: true,
+  start(event,ui){
+    $(obj).sortable('refresh');
+  },
+  over(event,ui){
+    $(this).parent().find('.cards').addClass('columnHover');
+  },
+  out(event,ui){
+    $(this).parent().find('.cards').removeClass('columnHover');
+  }
+}).disableSelection();
+
+$('.loadMore').droppable({
+  hoverClass: 'hover',
+  over(event, ui){
+    console.log('Over!')
+    if (!timer) {
+      timer = window.setTimeout(function() {
+        timer = null;
+        loadMore();
+      }, 300);
+    }
+  },
+  out(event, ui){
+    window.clearTimeout(timer);
+    timer = null;
+  }
+});
+
+$('.hide').hide();
+
+$('.loadMore').click(function(){
+  $('.hide').show().removeClass('hide');
+  $(this).hide();
+}); 
+    </script>
+</body>
+
 </html>
+
+<style>
+  .highlight{
+    min-height: 18px;
+    border: 1px dashed #9E9E9E !important;
+    background-color: transparent !important;
+    margin-top: 5px;
+    border-radius: 5px;
+    height: 100px;
+  }
+
+  ul, li {
+    list-style-type: none;
+  }
+</style>

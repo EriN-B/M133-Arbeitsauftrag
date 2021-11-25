@@ -34,3 +34,71 @@
   /* Support for IE. */
   font-feature-settings: 'liga';
 }
+
+html {
+  font-family: var(--default-font);
+}
+
+body {
+  background-color: var(--bg-color-primary);
+  color: #fff;
+}
+
+/*== BOARDS ==*/
+.boards {
+  display: flex;
+  /* flex-wrap: wrap; */
+  margin-top: 32px;
+}
+
+.board {
+  background-color: var(--bg-color-board);
+  border: 1px solid #fd951f11;
+  border-radius: 4px;
+  margin: 0 .8rem;
+}
+
+.board h3 {
+    padding:1rem;
+    color:#FD951Fcc;
+}
+
+.dropzone{
+    min-width: 282px;
+    min-height: 200px;
+    padding: 1rem;
+}
+
+.card {
+    padding: 1rem;
+    box-shadow: 0px 2px 2px -1px #FD951Fcc;
+    margin-top: 25px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 18px;
+    background-color: #1a1a1c;
+}
+
+.status{
+    width: 30px;
+    height: 8px;
+    background-color: gray;
+    border-radius:8px;
+    margin-bottom: 16px;
+}
+
+
+.highlight {
+    background-color: #fd951f1c;
+    box-shadow: 0px 2px 2px -1px #FD951Fcc;
+    transition: all .5s;
+}
+
+.is-dragging{
+    cursor:move;
+    opacity: .3;
+}
+
+.over{
+    background-color: #4c3107;
+}
