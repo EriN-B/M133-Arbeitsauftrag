@@ -65,7 +65,7 @@ async function addTask() {
 
     await fetch("http://localhost:8000/api/list", {
         method: "POST",
-        body: JSON.stringify({id: id, text: description, tag: tag, bgstyle:'bg-indigo-100',textstyle: 'text-indigo-90', color: '#312e81', date: month + " " + d.getDate(), state : 'todo'})
+        body: JSON.stringify({id: id, text: description, tag: tag, bgstyle:'bg-indigo-100',textstyle: 'text-indigo-900', color: '#312e81', date: month + " " + d.getDate(), state : 'todo'})
     });
 
     let item = 
