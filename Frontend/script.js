@@ -64,9 +64,11 @@ async function addTask() {
 }
 
 async function getUUID() {
-    return await fetch("http://localhost:8000/api/id", {
+    const response =  await fetch("http://localhost:8000/api/id", {
         method: "GET"
     });
+
+    return await response.json();
 }
 
 initialize();
