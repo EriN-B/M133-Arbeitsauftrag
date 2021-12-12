@@ -17,10 +17,9 @@ const router = new Router();
 
 router
 .get("/api/list", context => context.response.body = list)
-.get("/api/id", context => context.response.body = v4.generate())
+.get("/api/id", context => context.response.body = {id: v4.generate()})
 .post("/api/list", async context => {
     const newItem = await context.request.body({type: "json"}).value;
-    console.log("requestBody: ", newItem);
     list = [
         ...list,
         newItem
