@@ -12,7 +12,7 @@ async function getAllTasks() {
 }
 
 async function addTask() {
-    const id = await getId();
+    const id = await getUUID();
     await fetch("http://localhost:8000/api/list", {
         method: "POST",
         body: JSON.stringify({id: id, text: "test create task", tag: "Feature", status: "todo", date: "Dez 12"})
@@ -20,9 +20,8 @@ async function addTask() {
     console.log(id);
 }
 
-async function getId() {
-    const response = await fetch("http://localhost:8000/api/id", {
+async function getUUID() {
+    return await fetch("http://localhost:8000/api/id", {
         method: "GET"
     });
-    return response;
 }
