@@ -13,85 +13,81 @@
   <title>Document</title>
 </head>
 <body>
-  <main>
-    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 container" >
+<div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 container" >
 <!-- This example requires Tailwind CSS v2.0+ -->
-<div class="lg:flex lg:items-center lg:justify-between mt-5">
-  <div class="flex-1 min-w-0">
-    <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-        Kanban Board
-    </h2>
-  </div>
-  <div class="mt-5 flex">
-    <span class="">
-      <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-50" onclick="addTask()">
-        <!-- Heroicon name: solid/check -->
-        <svg class="-ml-1 mr-2 h-5 w-5 text-white-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-        </svg>
-        Create
-      </button>
-    </span>
-  </div>
-</div>
-
-
-      <main class="p-3 flex mt-10">
-        <div class="mr-2 ml-2 p-3 w-80 bg-gray-100 rounded col min-h-full">
-          <h3 class="text-sm font-medium text-gray-900">Todo</h3>
-          <div class="cards min-h-full	">
-          <ul class="mt-2 list-none	" id="col1" class="draggable min-h-full	">
-          </ul>
-        </div>
-        </div>
-        <div class="mr-2 ml-2 p-3 w-80 bg-gray-100 rounded col min-h-full" >
-          <h3 class="text-sm font-medium text-gray-900">In Progress</h3>
-          <div class="cards min-h-full">
-            <ul class="mt-2" id="col2" class="draggable min-h-full">
-            </ul>
-          </div>
-        </div>
-        <div class="mr-2 ml-2 p-3 w-80 bg-gray-100 rounded col min-h-full">
-          <h3 class="text-sm font-medium text-gray-900">Finished</h3>
-          <div class="cards min-h-full ">
-            <ul class="mt-2 min-h-full" id="col3">
-            </ul>
-          </div>
-        </div>
-      </main>
+  <div class="lg:flex lg:items-center lg:justify-between mt-5">
+    <div class="flex-1 min-w-0">
+      <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+          Kanban Board
+      </h2>
     </div>
-    <script>
+    <div class="mt-5 flex">
+      <span class="">
+        <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-50" onclick="addTask()">
+          <!-- Heroicon name: solid/check -->
+          <svg class="-ml-1 mr-2 h-5 w-5 text-white-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+          </svg>
+          Create
+        </button>
+      </span>
+    </div>
+  </div>
+  <main class="p-3 flex mt-10">
+    <div class="mr-2 ml-2 p-3 w-80 bg-gray-100 rounded col min-h-full">
+      <h3 class="text-sm font-medium text-gray-900">Todo</h3>
+      <div class="cards min-h-full	">
+      <ul class="mt-2 list-none	" id="todo" class="draggable min-h-full	">
+      </ul>
+    </div>
+    </div>
+    <div class="mr-2 ml-2 p-3 w-80 bg-gray-100 rounded col min-h-full" >
+      <h3 class="text-sm font-medium text-gray-900">In Progress</h3>
+      <div class="cards min-h-full">
+        <ul class="mt-2" id="progress" class="draggable min-h-full">
+        </ul>
+      </div>
+    </div>
+    <div class="mr-2 ml-2 p-3 w-80 bg-gray-100 rounded col min-h-full">
+      <h3 class="text-sm font-medium text-gray-900">Finished</h3>
+      <div class="cards min-h-full ">
+        <ul class="mt-2 min-h-full" id="done">
+        </ul>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+  var obj = '#todo,#progress,#done',
+  timer;
 
-
-      var obj = '#col1,#col2,#col3',
-    timer;
-
-function loadMore(){
-  $('.loadMore').addClass('animateLoadMore');
-  setTimeout(function(){
-    $('.loadMore').removeClass('animateLoadMore').hide();
-    $('.hide').show().removeClass('hide');
-    $(obj).sortable('refresh');
-  }, 600)
-}
-
-$(obj + ', .cards').sortable({
-  connectWith: '.draggable,.cards',
-  placeholder: 'highlight',
-  opacity: 0.5,
-  revert: true,
-  start(event,ui){
-    $(obj).sortable('refresh');
-  },
-  over(event,ui){
-    $(this).parent().find('.cards').addClass('columnHover');
-  },
-  out(event,ui){
-    $(this).parent().find('.cards').removeClass('columnHover');
+  function loadMore(){
+    $('.loadMore').addClass('animateLoadMore');
+    setTimeout(function(){
+      $('.loadMore').removeClass('animateLoadMore').hide();
+      $('.hide').show().removeClass('hide');
+      $(obj).sortable('refresh');
+    }, 600)
   }
-}).disableSelection();
 
-$('.loadMore').droppable({
+  $(obj + ', .cards').sortable({
+    connectWith: '.draggable,.cards',
+    placeholder: 'highlight',
+    opacity: 0.5,
+    revert: true,
+    start(event,ui){
+      $(obj).sortable('refresh');
+    },
+    over(event,ui){
+      $(this).parent().find('.cards').addClass('columnHover');
+    },
+    out(event,ui){
+      $(this).parent().find('.cards').removeClass('columnHover');
+      console.log("out");
+    }
+  }).disableSelection();
+
+  $('.loadMore').droppable({
   hoverClass: 'hover',
   over(event, ui){
     console.log('Over!')
@@ -105,16 +101,16 @@ $('.loadMore').droppable({
   out(event, ui){
     window.clearTimeout(timer);
     timer = null;
-  }
-});
+    }
+  });
 
-$('.hide').hide();
+  $('.hide').hide();
 
-$('.loadMore').click(function(){
-  $('.hide').show().removeClass('hide');
-  $(this).hide();
-}); 
-    </script>
+  $('.loadMore').click(function(){
+    $('.hide').show().removeClass('hide');
+    $(this).hide();
+  }); 
+</script>
 </body>
 
 </html>

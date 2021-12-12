@@ -5,12 +5,12 @@ async function initialize() {
 
     for (let task of tasks) {
         let item = 
-        `<li class="mt-2" id="c1">
+        `<li class="mt-2" id="task${task.id}">
             <div class="block p-5 bg-white rounded shadow">
             <div class="flex justify-between">
                 <p>${task.text}</p>
                 <span class="material-icons text-gray-500">
-                <a onclick="deleteItem()" class="large material-icons icon-red cursor-pointer">delete</a>
+                <a onclick="deleteItem(${task.id})" class="large material-icons icon-red cursor-pointer">delete</a>
                 </span>
             </div>
             <div class="mt-5 flex justify-between">
@@ -28,12 +28,23 @@ async function initialize() {
             </div>
             </div>
         </li>`;
-        document.getElementById("col1").innerHTML += item;
+        document.getElementById(task.state).innerHTML += item;
     }
 }
 
-async function deleteItem() {
-    window.alert("test");
+async function deleteItem(id) {
+    const tasks = await getAllTasks();
+
+    for (let task of tasks) {
+        let item = document.getElementById(`task${task.id}`);
+    }
+    await fetch("http://localhost:8000/api/list/", {
+        method: "DELETE",
+        body: JSON.stringify({
+            id : +id
+        }),
+    });
+    location.reload()
 }
 
 async function getAllTasks() {
@@ -58,4 +69,5 @@ async function getUUID() {
     });
 }
 
-initialize()
+initialize();
+

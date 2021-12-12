@@ -4,9 +4,9 @@ import {Router} from 'https://deno.land/x/oak@v6.3.1/mod.ts';
 import {v4} from 'https://deno.land/std@0.77.0/uuid/mod.ts';
 
 let list = [
-    {id: v4.generate(), text: "test 1", tag: "Feature", bgstyle:'bg-indigo-100',textstyle: 'text-indigo-90', color: '#312e81', date: "Sep 14"},
-    {id: v4.generate(), text: "test 2", tag: "Design", bgstyle:'bg-green-100',textstyle: 'text-green-900',color: '#14532d', date: "Dez 5"},
-    {id: v4.generate(), text: "test 3", tag: "Style", bgstyle:'bg-yellow-100',textstyle: 'text-yellow-900',color: '#713f12',date: "Nov 21"},
+    {id: 1, text: "test 1", tag: "Feature", bgstyle:'bg-indigo-100',textstyle: 'text-indigo-90', color: '#312e81', date: "Sep 14", state : 'todo'},
+    {id: 2, text: "test 2", tag: "Design", bgstyle:'bg-green-100',textstyle: 'text-green-900',color: '#14532d', date: "Dez 5", state: 'progress'},
+    {id: 3, text: "test 3", tag: "Style", bgstyle:'bg-yellow-100',textstyle: 'text-yellow-900',color: '#713f12',date: "Nov 21", state :'done'},
 ];
 
 const router = new Router();
