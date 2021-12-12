@@ -24,8 +24,15 @@ router
     context.response.status = 200;
 })
 .put("/api/list", async context => {
-    const toUpdateItem = list.find((item) => item.id === context.id);
-
+    const task = await context.request.body({type: "json"}).value;
+    const toUpdateItem = list.find((item) => item.id === task.id);
+    if(toUpdateItem) {
+        toUpdateItem.state = task.state;
+        context.response.status = 200; 
+    } else {
+        context.response.status = 404;
+    }
+    
 })
 .delete("/api/list", async context => {
     const itemId = await context.request.body({type: "json"}).value;
