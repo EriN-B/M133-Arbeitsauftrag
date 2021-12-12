@@ -27,5 +27,15 @@ router
     const toUpdateItem = list.find((item) => item.id === context.id);
 
 })
+.delete("/api/list", async context => {
+    const itemId = await context.request.body({type: "json"}).value;
+    const itemIndex = list.findIndex((item) => item.id == itemId.id);
+    if(itemIndex > -1) {
+     list.splice(itemIndex, 1);
+     context.response.status = 200;   
+    } else {
+        context.response.status = 404;
+    }
+})
 
 export const apiRoutes = router.routes();
