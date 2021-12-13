@@ -4,8 +4,8 @@ async function initialize() {
     const tasks = await getAllTasks();
 
     for (let task of tasks) {
-        let item = 
-        `<li class="mt-2" id="task${task.id}">
+        let item =
+            `<li class="mt-2" id="${task.id}">
             <div class="block p-5 bg-white rounded shadow">
             <div class="flex justify-between">
                 <p>${task.text}</p>
@@ -16,13 +16,11 @@ async function initialize() {
             <div class="mt-5 flex justify-between">
                 <p class="text-sm text-gray-600 ">${task.date}</p>
                 <div>
-                <span class="inline-flex items-center rounded px-2 py-1 ${task.bgstyle}">
-                    <svg class="h-2 w-2 text-indigo-500" viewBow="0 0 8 8" fill="${task.color}">
-                    <circle cx="4" cy="4" r="3" />
-                    </svg>
-                    <span class="ml-2 text-sm font-medium ${task.textstyle}">
-                    ${task.tag}
-                    </span>
+                <span class="inline-flex items-center rounded px-2 py-1 bg-indigo-100">
+                    <a class="small material-icons icon-red cursor-pointer" onclick="moveLeft(${task.id})">navigate_before</a>
+                </span>
+                <span class="inline-flex items-center rounded px-2 py-1 bg-indigo-100">
+                    <a class="small material-icons icon-red cursor-pointer" onclick="moveRight(${task.id})">navigate_next</a>
                 </span>
                 </div>
             </div>
@@ -33,43 +31,23 @@ async function initialize() {
     }
 }
 
-async function deleteItem(id) {
-    const tasks = await getAllTasks();
-
-    await fetch("http://localhost:8000/api/list/", {
-        method: "DELETE",
-        body: JSON.stringify({
-            id : +id
-        }),
-    });
-
-    document.getElementById("task"+id).remove();
-    //location.reload()
-    //initialize();
-}
-
-async function getAllTasks() {
-    const response = await fetch("http://localhost:8000/api/list", {
-        method: "GET"
-    });
-    return await response.json();
-}
-
 async function addTask() {
-    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const d = new Date();
-    let month = months[d.getMonth()];   
+    let month = months[d.getMonth()];
+
     let description = document.getElementById("descriptionInput").value;
-    let tag = document.getElementById("tagInput").value;
-    const id = await getUUID();
+
+    const UUID = await getUUID();
+    let id = UUID.id;
 
     await fetch("http://localhost:8000/api/list", {
         method: "POST",
-        body: JSON.stringify({id: id, text: description, tag: tag, bgstyle:'bg-indigo-100',textstyle: 'text-indigo-900', color: '#312e81', date: month + " " + d.getDate(), state : 'todo'})
+        body: JSON.stringify({ id: id, text: description, date: month + " " + d.getDate(), state: 'todo' })
     });
 
-    let item = 
-    `<li class="mt-2" id="task${id}">
+    let item =
+        `<li class="mt-2" id="${id}">
         <div class="block p-5 bg-white rounded shadow">
         <div class="flex justify-between">
             <p>${description}</p>
@@ -78,15 +56,13 @@ async function addTask() {
             </span>
         </div>
         <div class="mt-5 flex justify-between">
-            <p class="text-sm text-gray-600 ">${month +" "+d.getDate()}</p>
+            <p class="text-sm text-gray-600 ">${month + " " + d.getDate()}</p>
             <div>
             <span class="inline-flex items-center rounded px-2 py-1 bg-indigo-100">
-                <svg class="h-2 w-2 text-indigo-500" viewBow="0 0 8 8" fill="#312e81">
-                <circle cx="4" cy="4" r="3" />
-                </svg>
-                <span class="ml-2 text-sm font-medium text-indigo-90">
-                ${tag}
-                </span>
+                <a class="small material-icons icon-red cursor-pointer" onclick="moveLeft(${id})">navigate_before</a>
+            </span>
+            <span class="inline-flex items-center rounded px-2 py-1 bg-indigo-100">
+                <a class="small material-icons icon-red cursor-pointer" onclick="moveRight(${id})">navigate_next</a>
             </span>
             </div>
         </div>
@@ -96,11 +72,71 @@ async function addTask() {
     document.getElementById("todo").innerHTML += item;
 }
 
+async function moveRight(id) {
+    let item = document.getElementById(id);
+    let parent = item.parentNode.id;
+
+    switch (parent) {
+        case 'todo':
+            updateState(id, 'progress');
+            document.getElementById("progress").append(item);
+            break;
+        case 'progress':
+            updateState(id, 'done');
+            document.getElementById("done").append(item);
+            break;
+    }
+}
+
+async function moveLeft(id) {
+    let item = document.getElementById(id);
+    let parent = item.parentNode.id;
+
+    switch (parent) {
+        case 'progress':
+            updateState(id, 'todo');
+            document.getElementById("todo").append(item);
+            break;
+        case 'done':
+            updateState(id, 'progress');
+            document.getElementById("progress").append(item);
+            break;
+    }
+}
+
+async function updateState(id, state) {
+    await fetch("http://localhost:8000/api/list/", {
+        method: "PUT",
+        body: JSON.stringify({
+            id: id,
+            state: state
+        }),
+    });
+}
+
+async function deleteItem(id) {
+    await fetch("http://localhost:8000/api/list/", {
+        method: "DELETE",
+        body: JSON.stringify({
+            id: +id
+        }),
+    });
+
+    document.getElementById(id).remove();
+}
+
 async function getUUID() {
-    const response =  await fetch("http://localhost:8000/api/id", {
+    const response = await fetch("http://localhost:8000/api/id", {
         method: "GET"
     });
 
+    return await response.json();
+}
+
+async function getAllTasks() {
+    const response = await fetch("http://localhost:8000/api/list", {
+        method: "GET"
+    });
     return await response.json();
 }
 
